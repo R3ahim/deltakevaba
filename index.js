@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app =  express();
 const port = process.env.PORT || 5000
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ExplainVerbosity, ObjectId  } = require('mongodb');
 
 app.use(cors());
 app.use(express.json());
@@ -37,21 +37,19 @@ async function run() {
    app.post('/account',async(req,res)=>{
     const orders = req.body;
     const result = await accCollection.insertOne(orders);
-    res.send(result);
+    // res.send(result);
+    console.log(orders)
    })
    app.get('/account',async(req,res)=>{
     const orderses= await accCollection.find().toArray();
     res.send(orderses)
    })
-     // delete the value
-     app.delete('/account/:id', async (req, res) => {
-      const id = req.body.id;
-  
-      const query = { _id: ObjectId(id) };
-      const result = await accCollection.deleteOne(query);
-      res.send(result);
-      // res.send(id)
-  });
+   app.delete('/account/:id', async (req, res) => {
+    const id = req.body.id;
+
+    res.send(id);
+});        
+     
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
