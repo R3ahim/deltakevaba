@@ -24,6 +24,7 @@ async function run() {
     await client.connect();
     const database = client.db('ordersDb');
     const ordersCollection = database.collection('orders');
+    const accCollection = database.collection('account');
    app.post('/orders',async(req,res)=>{
     const orders = req.body;
     const result = await ordersCollection.insertOne(orders);
@@ -31,6 +32,15 @@ async function run() {
    })
    app.get('/orders',async(req,res)=>{
     const orderses= await ordersCollection.find().toArray();
+    res.send(orderses)
+   })
+   app.post('/account',async(req,res)=>{
+    const orders = req.body;
+    const result = await accCollection.insertOne(orders);
+    res.send(result);
+   })
+   app.get('/account',async(req,res)=>{
+    const orderses= await accCollection.find().toArray();
     res.send(orderses)
    })
 
