@@ -40,8 +40,8 @@ async function run() {
     res.send(result);
    })
     app.get('/account',async(req,res)=>{
-      const acc = await accCollection.find().toarray();
-    res.send(acc)
+      const account = await accCollection.find().toarray();
+    res.send(account)
     }
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
