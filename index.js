@@ -43,6 +43,15 @@ async function run() {
     const orderses= await accCollection.find().toArray();
     res.send(orderses)
    })
+     // delete the value
+     app.delete('/account/:id', async (req, res) => {
+      const id = req.body.id;
+  
+      const query = { _id: ObjectId(id) };
+      const result = await accCollection.deleteOne(query);
+      res.send(result);
+      // res.send(id)
+  });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
